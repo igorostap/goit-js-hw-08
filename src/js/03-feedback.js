@@ -7,6 +7,7 @@ let valueInput = {
     email: '',
     message:'',
 };
+
 formSubmit.addEventListener('submit', OnFormSubmit);
 inputEmail.addEventListener('input', throttle(OnInputEmail,500));
 inputMessage.addEventListener('input', throttle(OnInputMessage,500));
