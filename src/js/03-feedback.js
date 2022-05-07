@@ -8,19 +8,20 @@ let valueInput = {
     message:'',
 };
 
+MessagesOnInput();
 formSubmit.addEventListener('submit', OnFormSubmit);
 inputEmail.addEventListener('input', throttle(OnInputEmail,500));
 inputMessage.addEventListener('input', throttle(OnInputMessage,500));
 
-MessagesOnInput();
+
 
 function OnInputEmail(e) {
-    const value = e.currentTarget.value;
+    const value = e.target.value;
     valueInput.email = value;
     localStorage.setItem("feedback-form-state", JSON.stringify(valueInput));
 };
 function OnInputMessage(e) {
-    const value = e.currentTarget.value;
+    const value = e.target.value;
     valueInput.message = value;
     localStorage.setItem("feedback-form-state", JSON.stringify(valueInput));
 };
@@ -29,16 +30,19 @@ function OnFormSubmit(e) {
     const savedMessage = localStorage.getItem("feedback-form-state");
     const messages = JSON.parse(savedMessage);
     console.log(messages);
-    e.currentTarget.reset();
+    e.target.reset();
     localStorage.removeItem("feedback-form-state");
+    
 };
 
-function MessagesOnInput(e) {
+function MessagesOnInput() {
     const savedMessage = localStorage.getItem("feedback-form-state");
     const messages = JSON.parse(savedMessage);
-    if (savedMessage) {
-        
-        inputEmail.value = messages.email;
+
+    
+    if (savedMessage) { 
         inputMessage.value = messages.message;
+        inputEmail.value = messages.email;   
     };
+         
 };

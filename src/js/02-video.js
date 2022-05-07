@@ -22,8 +22,11 @@ function stopTime(evt) {
     localStorage.setItem("videoplayer-current-time", timeVideo);
 };
 const saveTime = localStorage.getItem('videoplayer-current-time');
-player.setCurrentTime(saveTime).then(function () {
+if (!saveTime) {
+    
+}
+    
+    player.setCurrentTime(saveTime).then(function () {
 
 });
-
 
