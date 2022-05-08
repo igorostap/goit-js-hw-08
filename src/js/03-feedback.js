@@ -13,8 +13,11 @@ formSubmit.addEventListener('submit', OnFormSubmit);
 inputEmail.addEventListener('input', throttle(OnInputEmail,500));
 inputMessage.addEventListener('input', throttle(OnInputMessage,500));
 
-
-
+let messages = {
+    email: '',
+    message:'',
+};
+ 
 function OnInputEmail(e) {
     const value = e.target.value;
     valueInput.email = value;
@@ -23,16 +26,22 @@ function OnInputEmail(e) {
 function OnInputMessage(e) {
     const value = e.target.value;
     valueInput.message = value;
+   
     localStorage.setItem("feedback-form-state", JSON.stringify(valueInput));
 };
 function OnFormSubmit(e) {
     e.preventDefault();
+  
     const savedMessage = localStorage.getItem("feedback-form-state");
-    const messages = JSON.parse(savedMessage);
+    
+     messages = JSON.parse(savedMessage);
     console.log(messages);
     e.target.reset();
     localStorage.removeItem("feedback-form-state");
-    
+    valueInput = {
+        email: '',
+    message:'',
+    }
 };
 
 function MessagesOnInput() {
